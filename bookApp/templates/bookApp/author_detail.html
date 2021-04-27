@@ -1,0 +1,50 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+<div class="site-wrap">
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    {% if author.avatar %}
+                        <img src="{{author.avatar.url}}" alt="Image" class="img-fluid">
+                    {% else %}
+                        <img src="/media/anonymous-avatar.jpg" alt="Image" class="img-fluid">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <h1 class="text-black">{{author.full_name}}</h1>
+                    {% if author.info %}
+                        <p>{{author.info| safe}}</p>
+                    {% else %}
+                        <p>No information</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-footer border-top">
+    <div class="container">
+        <div class="row">
+            {% for item in books %}
+            <div class="col-sm-6 col-lg-2 " data-aos="fade-up">
+                <div class="block-4 text-center border">
+                    <figure class="block-4-image">
+                        <a href="{{item.get_absolute_url}}"><img src="{{item.image.url}}"
+                                                                 alt="Image placeholder"
+                                                                 class="img-fluid"></a>
+                    </figure>
+                    <div class="block-4-text p-4">
+                        <h3><p class="mb-0"><a href="{{item.get_absolute_url}}">{{item.title}}</a></p></h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

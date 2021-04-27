@@ -1,0 +1,8 @@
+<li class="has-children">
+    <a>Genre</a>
+    <ul class="dropdown">
+        {% for item in genres%}
+            <li><a href="{{item.get_absolute_url }}">{{item.title}}</a></li>
+        {% endfor %}
+    </ul>
+</li>

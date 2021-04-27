@@ -1,0 +1,63 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+<div class="site-wrap">
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{book.image.url}}" alt="Image" class="img-fluid">
+                    <br>
+                    <br>
+                    {% if book.published %}
+                        <h4 class="text-black">Published: {{book.published|date:"Y"}}</h4>
+                    {% endif %}
+                    <h4 class="text-black">Pages: {{book.pages}}</h4>
+                </div>
+                <div class="col-md-8">
+                    <h1 class="text-black">{{book.title}}</h1>
+                    <h5 class="text-black">by
+                        {% for item in book.authors.all %}
+                        <a href="{{item.get_absolute_url}}">{{item.full_name}}</a>
+                        {% endfor %}
+                    </h5>
+                    {% if book.book_excerpt %}
+                    <h3 class="text-black">Book Excerpt:</h3>
+                    <p>{{book.book_excerpt| safe}}</p>
+                    {% else %}
+                    <br>
+                    {% endif %}
+                    <form action="{% url 'pdf' book.slug %}" method="get">
+                        <input type="submit" name="read" value="Read Online" class="buy-now btn btn-sm btn-primary mr-3">
+                        <input type="submit" name="download" value="download" class="buy-now btn btn-sm btn-primary">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-footer border-top">
+    <div class="container">
+        <div class="row">
+            {% for item in books %}
+            <div class="col-sm-6 col-lg-2 " data-aos="fade-up">
+                <div class="block-4 text-center border">
+                    <figure class="block-4-image">
+                        <a href="{{item.get_absolute_url}}"><img src="{{item.image.url}}"
+                                                                 alt="Image placeholder"
+                                                                 class="img-fluid"></a>
+                    </figure>
+                    <div class="block-4-text p-4">
+                        <h3><p class="mb-0"><a href="{{item.get_absolute_url}}">{{item.title}}</a></p></h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

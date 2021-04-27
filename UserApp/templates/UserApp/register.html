@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <form action="{% url 'register' %}" method="post" style="width: 405px">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class=" form-outline mb-4 ">
+                <input type="email" id="username" name="username" class="form-control" required placeholder="Email address"/>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="password" id="pass" name="password1" class="form-control" required placeholder="Password"/>
+            </div>
+            <div class="form-outline mb-4">
+                <input type="password" id="con-pass" name="password2" class="form-control"  required placeholder="Confirm Password"/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">REGISTER</button>
+
+            <div class="text-center">
+                <a href="{% url 'login'%}">or Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}
