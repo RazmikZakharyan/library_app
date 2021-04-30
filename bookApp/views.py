@@ -59,7 +59,7 @@ class SearchView(ListView):
     def get_queryset(self):
         try:
             books = Book.objects.filter(title__icontains=self.request.GET.get('s'))
-        except Exception:
+        except ValueError:
             raise Http404()
         return books
 
